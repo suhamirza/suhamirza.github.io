@@ -122,6 +122,23 @@ img {
     overflow: visible; /* Allows the text to be visible */
 }
 
+/* Existing styles for display-1 */
+.display-1 {
+    font-size: 3rem; /* Example size, adjust as needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .display-1 {
+        font-size: 2rem; /* Smaller font size for tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .display-1 {
+        font-size: 1.5rem; /* Even smaller font size for mobile phones */
+    }
+}
 
 /* SECTION TITLE */
 .section-title {
