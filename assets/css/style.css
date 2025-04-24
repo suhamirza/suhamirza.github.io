@@ -83,6 +83,25 @@ img {
     color: var(--c-brand);
 }
 
+<<<<<<< HEAD
+=======
+#book-btn {
+    color: var(--c-brand);
+    font-weight: 550;
+    border: 2.5px solid var(--c-brand);
+    padding: 5px 20px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease;
+    margin-left: 20px;
+    margin-top: 2px;
+}
+
+#book-btn:hover {
+    background-color: var(--c-brand);
+    color: white;
+}
+
+>>>>>>> 1353fc2 (first commit)
 
 
 
@@ -124,7 +143,11 @@ img {
 
 /* Existing styles for display-1 */
 .display-1 {
+<<<<<<< HEAD
     font-size: 3rem;
+=======
+    font-size: 3rem; 
+>>>>>>> 1353fc2 (first commit)
 }
 
 /* Responsive adjustments */
@@ -140,6 +163,10 @@ img {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1353fc2 (first commit)
 /* SECTION TITLE */
 .section-title {
     margin-bottom: 60px;
@@ -158,6 +185,90 @@ img {
     margin-right: auto;
 }
 
+<<<<<<< HEAD
+=======
+/* Booking Section Specific Styles */
+#booking {
+    position: relative;
+    z-index: 2;
+}
+
+#booking::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(var(--c-brand-rgb), 0.8), rgba(var(--c-brand-rgb), 0.8)), url(../images/salon2.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#booking .section-title {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+#booking .section-title h1 {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: white;
+}
+
+#booking .section-title .line {
+    width: 100px;
+    height: 3px;
+    background: white;
+    position: relative;
+    margin: 20px auto;
+}
+
+#booking .section-title .line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    opacity: 0.7;
+}
+
+#booking .section-title p {
+    font-size: 1.2rem;
+    text-shadow: none;
+    opacity: 0.9;
+    color: white;
+}
+
+/* Add animation for the title elements */
+#booking .section-title h1,
+#booking .section-title .line,
+#booking .section-title p {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+#booking .section-title .line {
+    animation-delay: 0.2s;
+}
+
+#booking .section-title p {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+>>>>>>> 1353fc2 (first commit)
 
 /* ICONBOX */
 .iconbox {
@@ -208,6 +319,11 @@ img {
     color: white;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1353fc2 (first commit)
 /* CONTACT */
 #contact {
     position: relative;
@@ -271,6 +387,348 @@ footer .line {
     margin-bottom: 24px;
 }
 
+<<<<<<< HEAD
+=======
+/* BOOKING */
+.booking-form {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.booking-form:hover {
+    transform: translateY(-5px);
+}
+
+.booking-form .form-label {
+    color: var(--c-dark);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.booking-form .form-control,
+.booking-form .form-select {
+    border: 1px solid rgba(var(--c-brand-rgb), 0.2);
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: var(--transition);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.booking-form .form-control:focus,
+.booking-form .form-select:focus {
+    border-color: var(--c-brand);
+    box-shadow: 0 0 0 0.2rem rgba(var(--c-brand-rgb), 0.25);
+    background: white;
+}
+
+/* Date Selection Styles */
+.date-slider {
+    border-bottom: 1px solid rgba(var(--c-brand-rgb), 0.2);
+    padding-bottom: 1rem;
+}
+
+.date-item {
+    min-width: 80px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.date-item .day {
+    font-size: 0.9rem;
+    color: var(--c-body);
+    margin-bottom: 4px;
+}
+
+.date-item .date {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--c-dark);
+}
+
+.date-item:hover {
+    background-color: rgba(var(--c-brand-rgb), 0.1);
+    transform: translateY(-2px);
+}
+
+.date-item.active {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+    transform: translateY(-2px);
+}
+
+.date-item.active .day,
+.date-item.active .date {
+    color: white;
+}
+
+/* Time Slot Styles */
+.time-slot {
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    min-width: 90px;
+    text-align: center;
+    border: 2px solid rgba(var(--c-brand-rgb), 0.2);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.time-slot.available {
+    color: var(--c-dark);
+}
+
+.time-slot.available:hover {
+    border-color: var(--c-brand);
+    background-color: rgba(var(--c-brand-rgb), 0.1);
+    transform: translateY(-2px);
+}
+
+.time-slot.selected {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.time-slot.booked {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #adb5bd;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.time-slot-group h6 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--c-dark);
+}
+
+.btn-brand {
+    background-color: var(--c-brand);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(var(--c-brand-rgb), 0.3);
+}
+
+.btn-brand:hover {
+    background-color: var(--c-brand-light);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--c-brand-rgb), 0.4);
+}
+
+/* ADMIN PANEL */
+.card {
+    border: none;
+    box-shadow: var(--box-shadow);
+    border-radius: 12px;
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--c-dark);
+    border-bottom: 2px solid rgba(var(--c-brand-rgb), 0.1);
+}
+
+.table td {
+    vertical-align: middle;
+    color: var(--c-body);
+}
+
+.badge {
+    padding: 0.5em 1em;
+    font-weight: 500;
+}
+
+.badge.bg-success {
+    background-color: rgba(var(--c-brand-rgb), 0.1) !important;
+    color: var(--c-brand) !important;
+}
+
+.badge.bg-warning {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+    color: #ffc107 !important;
+}
+
+.badge.bg-danger {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+    color: #dc3545 !important;
+}
+
+.btn-outline-primary {
+    color: var(--c-brand);
+    border-color: var(--c-brand);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+    color: white;
+}
+
+.btn-outline-success {
+    color: var(--c-brand);
+    border-color: var(--c-brand);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+    color: white;
+}
+
+.pagination .page-link {
+    color: var(--c-brand);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 8px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+    color: white !important; /* Force white text when active */
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #adb5bd;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(var(--c-brand-rgb), 0.1);
+    color: var(--c-brand);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--c-brand);
+    box-shadow: 0 0 0 0.2rem rgba(var(--c-brand-rgb), 0.25);
+}
+
+/* Modal Styles */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(var(--c-brand-rgb), 0.1);
+    padding: 1.5rem;
+}
+
+.modal-title {
+    color: var(--c-dark);
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(var(--c-brand-rgb), 0.1);
+    padding: 1.5rem;
+}
+
+.modal .form-label {
+    color: var(--c-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.modal .form-control-static {
+    color: var(--c-body);
+    margin-bottom: 0;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(var(--c-brand-rgb), 0.1);
+}
+
+.modal .btn-close {
+    color: var(--c-brand);
+}
+
+.modal .btn-secondary {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+    color: white;
+}
+
+.modal .btn-secondary:hover {
+    background-color: var(--c-brand-light);
+    border-color: var(--c-brand-light);
+    color: white;
+}
+
+/* Confirmation Modal Specific Styles */
+#confirmationModal .btn-secondary {
+    color: var(--c-brand);
+    border-color: var(--c-brand);
+    background-color: transparent;
+}
+
+#confirmationModal .btn-secondary:hover {
+    color: white;
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+}
+
+#confirmationModal .btn-primary {
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+}
+
+#confirmationModal .btn-primary:hover {
+    background-color: var(--c-brand-light);
+    border-color: var(--c-brand-light);
+}
+
+/* Reset Button Style */
+#resetStatusBtn {
+    color: var(--c-brand);
+    border-color: var(--c-brand);
+    background-color: transparent;
+}
+
+#resetStatusBtn:hover {
+    color: white;
+    background-color: var(--c-brand);
+    border-color: var(--c-brand);
+}
+
+>>>>>>> 1353fc2 (first commit)
 
 
 
