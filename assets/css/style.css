@@ -83,8 +83,6 @@ img {
     color: var(--c-brand);
 }
 
-<<<<<<< HEAD
-=======
 #book-btn {
     color: var(--c-brand);
     font-weight: 550;
@@ -101,7 +99,6 @@ img {
     color: white;
 }
 
->>>>>>> 1353fc2 (first commit)
 
 
 
@@ -143,11 +140,7 @@ img {
 
 /* Existing styles for display-1 */
 .display-1 {
-<<<<<<< HEAD
-    font-size: 3rem;
-=======
     font-size: 3rem; 
->>>>>>> 1353fc2 (first commit)
 }
 
 /* Responsive adjustments */
@@ -163,10 +156,6 @@ img {
     }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1353fc2 (first commit)
 /* SECTION TITLE */
 .section-title {
     margin-bottom: 60px;
@@ -185,8 +174,6 @@ img {
     margin-right: auto;
 }
 
-<<<<<<< HEAD
-=======
 /* Booking Section Specific Styles */
 #booking {
     position: relative;
@@ -268,7 +255,6 @@ img {
         transform: translateY(0);
     }
 }
->>>>>>> 1353fc2 (first commit)
 
 /* ICONBOX */
 .iconbox {
@@ -319,11 +305,8 @@ img {
     color: white;
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 1353fc2 (first commit)
 /* CONTACT */
 #contact {
     position: relative;
@@ -387,8 +370,6 @@ footer .line {
     margin-bottom: 24px;
 }
 
-<<<<<<< HEAD
-=======
 /* BOOKING */
 .booking-form {
     background: rgba(255, 255, 255, 0.95);
@@ -728,7 +709,6 @@ footer .line {
     border-color: var(--c-brand);
 }
 
->>>>>>> 1353fc2 (first commit)
 
 
 
