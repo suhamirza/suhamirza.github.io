@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Get all time slots
     const timeSlots = document.querySelectorAll('.time-slot');
     const dateItems = document.querySelectorAll('.date-item');
@@ -10,13 +10,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
     
-    // Sample booked slots for presentation
-    const sampleBookedSlots = {
-        [currentDate]: ['10:00', '14:00', '16:00'], // Today's booked slots
-        [new Date(now.setDate(now.getDate() + 1)).toISOString().split('T')[0]]: ['11:00', '15:00'], // Tomorrow's booked slots
-        [new Date(now.setDate(now.getDate() + 1)).toISOString().split('T')[0]]: ['09:00', '13:00'] // Day after tomorrow's booked slots
-    };
-    
+    // Function to fetch booked slots for a date from backend
+    async function fetchBookedSlots(date) {
+        try {
+            const response = await fetch(`/api/bookings/date/${date}`);
+            if (!response.ok) return [];
+            const bookings = await response.json();
+            // Return an array of times that are booked
+            return bookings.map(b => b.time);
+        } catch (err) {
+            console.error('Failed to fetch booked slots:', err);
+            return [];
+        }
+    }
+
+    // Function to check if a time slot has passed
+    function isTimeSlotPassed(date, time) {
+        const [hours, minutes] = time.split(':').map(Number);
+        const slotDate = new Date(date);
+        slotDate.setHours(hours, minutes, 0);
+        // If the date is today, only mark slots as passed if they're before current time
+        if (date === currentDate) {
+            return hours < currentHour || (hours === currentHour && minutes <= currentMinutes);
+        }
+        // For future dates, all slots are available (unless booked)
+        return false;
+    }
+
+    // Function to update time slot availability
+    async function updateTimeSlotAvailability() {
+        const selectedDate = document.querySelector('.date-item.active')?.dataset.date || currentDate;
+        const bookedSlots = await fetchBookedSlots(selectedDate);
+        timeSlots.forEach(slot => {
+            const time = slot.textContent.trim();
+            const isPassed = isTimeSlotPassed(selectedDate, time);
+            const isBooked = bookedSlots.includes(time);
+            if (isPassed || isBooked) {
+                slot.classList.add('booked');
+                slot.classList.remove('available', 'selected');
+                slot.style.cursor = 'not-allowed';
+            } else {
+                slot.classList.remove('booked');
+                slot.classList.add('available');
+                slot.style.cursor = 'pointer';
+            }
+        });
+    }
+
     // Update all date items to show current and future dates
     dateItems.forEach((item, index) => {
         const date = new Date();
@@ -35,59 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
             item.classList.add('active');
         }
     });
-    
-    // Function to check if a time slot has passed or is booked
-    function isTimeSlotPassed(date, time) {
-        const [hours, minutes] = time.split(':').map(Number);
-        const slotDate = new Date(date);
-        slotDate.setHours(hours, minutes, 0);
-        
-        // Check if the slot is booked
-        if (sampleBookedSlots[date] && sampleBookedSlots[date].includes(time)) {
-            return true;
-        }
-        
-        // If the date is today, only mark slots as passed if they're before current time
-        if (date === currentDate) {
-            return hours < currentHour || (hours === currentHour && minutes <= currentMinutes);
-        }
-        
-        // For future dates, all slots are available
-        return false;
-    }
-    
-    // Function to update time slot availability
-    function updateTimeSlotAvailability() {
-        const selectedDate = document.querySelector('.date-item.active')?.dataset.date || currentDate;
-        
-        timeSlots.forEach(slot => {
-            const time = slot.textContent.trim();
-            const isPassed = isTimeSlotPassed(selectedDate, time);
-            
-            if (isPassed) {
-                slot.classList.add('booked');
-                slot.classList.remove('available', 'selected');
-                slot.style.cursor = 'not-allowed';
-            } else {
-                slot.classList.remove('booked');
-                slot.classList.add('available');
-                slot.style.cursor = 'pointer';
-            }
-        });
-    }
-    
+
     // Add click event listener to date items
     dateItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove active class from all dates
+        item.addEventListener('click', async function() {
             dateItems.forEach(d => d.classList.remove('active'));
-            // Add active class to clicked date
             this.classList.add('active');
-            // Update time slot availability
-            updateTimeSlotAvailability();
+            await updateTimeSlotAvailability();
         });
     });
-    
+
     // Add click event listener to time slots
     timeSlots.forEach(slot => {
         slot.addEventListener('click', function() {
@@ -99,35 +96,66 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('selected');
         });
     });
-    
-    // Handle form submission
-    form.addEventListener('submit', function(e) {
+
+    // Show a beautiful toast notification
+    function showBookingToast(message, isSuccess = true) {
+        const toastEl = document.getElementById('bookingToast');
+        const toastBody = document.getElementById('bookingToastBody');
+        toastBody.textContent = message;
+        // Change toast color
+        toastEl.classList.remove('text-bg-success', 'text-bg-danger');
+        toastEl.classList.add(isSuccess ? 'text-bg-success' : 'text-bg-danger');
+        // Bootstrap 5 Toast
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    }
+
+    // Handle form submission with backend POST
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+        console.log('Form submit handler triggered');
         const selectedDate = document.querySelector('.date-item.active')?.dataset.date;
         const selectedTime = document.querySelector('.time-slot.selected')?.textContent.trim();
-        
-        if (!selectedDate || !selectedTime) {
-            alert('Please select both a date and time');
-            return;
-        }
-        
-        // Here you would typically send the data to your backend
         console.log('Selected date:', selectedDate);
         console.log('Selected time:', selectedTime);
-        console.log('Selected service:', document.getElementById('service').value);
-        console.log('Client name:', document.getElementById('name').value);
-        console.log('Client email:', document.getElementById('email').value);
-        console.log('Client phone:', document.getElementById('phone').value);
-        
-        // Show success message
-        alert('Booking submitted successfully!');
-        form.reset();
-        
-        // Reset selections
-        timeSlots.forEach(s => s.classList.remove('selected'));
+        if (!selectedDate || !selectedTime) {
+            showBookingToast('Please select both a date and time', false);
+            return;
+        }
+        const service = document.getElementById('service')?.value;
+        const name = document.getElementById('name')?.value;
+        const email = document.getElementById('email')?.value;
+        const phone = document.getElementById('phone')?.value;
+        const notes = document.getElementById('notes')?.value;
+        // Validate all required fields
+        if (!name || !phone || !email || !service) {
+            showBookingToast('Please fill in all required fields', false);
+            return;
+        }
+        console.log('Form data:', { name, phone, email, service, notes });
+        const bookingData = { name, phone, email, service, date: selectedDate, time: selectedTime, notes };
+        try {
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bookingData)
+            });
+            console.log('Fetch response status:', response.status);
+            if (response.ok) {
+                showBookingToast('Booking submitted successfully!');
+                form.reset();
+                timeSlots.forEach(s => s.classList.remove('selected'));
+                await updateTimeSlotAvailability();
+            } else {
+                const err = await response.json();
+                showBookingToast('Booking failed: ' + (err.error || 'Unknown error'), false);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            showBookingToast('Could not connect to server. Is it running?', false);
+        }
     });
-    
+
     // Initial update of time slot availability
-    updateTimeSlotAvailability();
+    await updateTimeSlotAvailability();
 }); 

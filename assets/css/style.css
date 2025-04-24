@@ -709,6 +709,18 @@ footer .line {
     border-color: var(--c-brand);
 }
 
-
-
-
+/* Custom Toast Styles */
+.custom-toast {
+  background: #fff !important;
+  color: var(--c-brand) !important;
+  border: 2px solid var(--c-brand) !important;
+  box-shadow: 0 4px 24px 0 rgba(var(--c-brand-rgb), 0.15);
+}
+.custom-toast .toast-body {
+  color: var(--c-brand) !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.custom-toast .btn-close {
+  filter: none;
+}

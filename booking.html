@@ -58,12 +58,16 @@
                     <div class="booking-form theme-shadow p-lg-5 p-4">
                         <form action="#" class="row g-3">
                             <div class="col-md-6">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" required>
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName">
+                            </div>
+                            <div class="col-md-6 d-none">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" required>
+                                <input type="text" class="form-control" id="lastName">
                             </div>
                             <div class="col-md-6">
                                 <label for="phone" class="form-label">Phone Number</label>
@@ -148,7 +152,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="notes" class="form-label">Additional Notes</label>
-                                <textarea class="form-control" id="notes" rows="3"></textarea>
+                                <textarea class="form-control" id="notes" rows="3" placeholder="Anything else we should know?"></textarea>
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-brand">Book Appointment</button>
@@ -203,15 +207,27 @@
             <div class="container">
                 <div class="row g-4 justify-content-between">
                     <div class="col-auto">
-                        <p class="mb-0">© Copyright Rani's. All Rights Reserved</p>
+                        <p class="mb-0"> Rani's. All Rights Reserved</p>
                     </div>
                     <div class="col-auto">
-                        <p class="mb-0">Designed with 🩷 By Suha Mirza</p>
+                        <p class="mb-0">Designed with By Suha Mirza</p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+      <div id="bookingToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="bookingToastBody">
+            Booking successful!
+          </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -219,4 +235,4 @@
     <script src="./assets/js/booking.js"></script>
 </body>
 
-</html> 
+</html>
